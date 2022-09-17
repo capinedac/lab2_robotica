@@ -26,7 +26,7 @@ Para esto se accede al paquete hello_turtle de ROS que se encuentra en el worksp
 El código del script se realizo de la sigiuente forma:
 
 ### Librerias
-''' python
+``` python
 #LIBRERIAS
 import rospy
 from geometry_msgs.msg import Twist                                                     #Publicacion de mensajes de desplazamiento
@@ -35,11 +35,11 @@ from std_srvs.srv import Empty                                                  
 import termios, sys, os
 from numpy import pi
 TERMIOS = termios
-'''
+```
 
 ### Funciones
 #### Publicador
-''' python
+``` python
 def pubVel(vel_x, ang_z, t):
     pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)                     #Definición de publicador (topic, message type y tamaño de cola)
     rospy.init_node('velPub', anonymous=False)                                          #Inicio del nodo velPub
@@ -50,11 +50,11 @@ def pubVel(vel_x, ang_z, t):
     endTime = rospy.Time.now() + rospy.Duration(t)                                      #Límite de tiempo de publicación
     while rospy.Time.now() < endTime:                                                   #Publicacion
         pub.publish(vel)
-'''
+```
 
 #### Servicio teleport absoluto
 Utilizada para retornar la tortuga a su posición y orientación original
-''' python
+``` python
 def servTpAbs(x, y, ang):                                                               #Función para el servicio de teleport absoluto
     rospy.wait_for_service('/turtle1/teleport_absolute')                                #Se mantiene en espera de solicitud del servicio
     try:
@@ -62,11 +62,11 @@ def servTpAbs(x, y, ang):                                                       
         teleport = serv(x, y, ang)
     except rospy.ServiceException as e:
         print(str(e))
-'''
+```
 
 #### Servicio teleport relativo
 Utilizada para girar 180° la tortuga
-''' python
+``` python
 def servTpRelat(linear, angular):                                                       #Función para servicio de teleport relativo
     rospy.wait_for_service('/turtle1/teleport_relative')                                #Se mantiene en espera de solicitud del servicio
     try:
@@ -74,11 +74,11 @@ def servTpRelat(linear, angular):                                               
         teleport = serv(linear, angular)                                                
     except rospy.ServiceException as e:
         print(str(e))
-'''
+```
 
 #### Identificación de tecla presionada
 Identificar cual de las teclas es presionada para luego ser asignada la función correspondiente
-''' python
+``` python
 def getkey():                                                                           #Función para identificar tecla presionada.
     fd = sys.stdin.fileno()
     old = termios.tcgetattr(fd)
@@ -93,11 +93,11 @@ def getkey():                                                                   
     finally:
         termios.tcsetattr(fd, TERMIOS.TCSAFLUSH, old)
     return c
-'''
+```
 
 #### Servicio para limpiar la pantalla
 Utilizada para limpiar la pantalla cuando se retorna la tortuga
-''' python
+``` python
 def servClear():                                                                        #Función para limpiar recorrido
     rospy.wait_for_service('/clear')                                                    #Espera al servicio clear
     try:
@@ -105,11 +105,11 @@ def servClear():                                                                
         clear = serv()
     except rospy.ServiceException as e:
         print(str(e))
-'''
+```
 
 ### Main
 Se manetiene en un ciclo evaluando que tecla es presionada y ejecutando la función respectiva
-''' python
+``` python
 if __name__ == '__main__':
     while 1: 
         key = getkey()
@@ -126,7 +126,7 @@ if __name__ == '__main__':
         if key == b'r': 
             servTpAbs(5.54,5.54,0)                                                      #Teleport de la tortuga al centro
             servClear()                                                                 #Limpia recorrido de la pantalla
-'''
+```
 
 Luego de generado el script, se guarda.
 Es necesario modificar el archivo CMakeList.txt agregando el script de la misma forma en que se ven los demás, en la sección de catkin_install_python.
@@ -135,26 +135,26 @@ Luego se realiza la ejecución de este con los siguientes pasos:
 
 1. Lanzar 3 terminales
 2. En la primera se inicia el nodo maestro con el comando
-´´´
+```
 roscore
-´´´
+```
 3. En la segunda se ejecuta el node de turtlesim, es decir la tortuga, con el comando
-'''
+```
 rosrun turtlesim turtlesim_node
-'''
+```
 4. En el tercero accedemos a la dirección del workspace de catkin y ejecutamos el comando para hacer la build del paquete
-'''
+```
 cd catkin_ws
 catkin build hello_turtle
-'''
+```
 5. Luego en este mismo ingresamos 
-'''
+```
 source devel/setup.bash
-'''
+```
 6. Finalmente ejecutamos el script con el comando
-'''
+```
 rosrun hello_turtle myTeleopKey.py
-'''
+```
 lo que deja la terminal en espera por el ingreso de teclas, permitiendonos operar como se solicita la tortuga a través de W, A, S, D, SPACE y R.
 
 
