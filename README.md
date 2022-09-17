@@ -135,9 +135,9 @@ Luego se realiza la ejecución de este con los siguientes pasos:
 
 1. Lanzar 3 terminales
 2. En la primera se inicia el nodo maestro con el comando
-'''
+´´´
 roscore
-'''
+´´´
 3. En la segunda se ejecuta el node de turtlesim, es decir la tortuga, con el comando
 '''
 rosrun turtlesim turtlesim_node
