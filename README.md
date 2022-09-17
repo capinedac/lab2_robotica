@@ -16,12 +16,14 @@ Equipo de trabajo:
 ## Python
 Se pide escribir un código que permita operar una tortuga del paquete turtlesim con el uso del teclado, cumpliendo con las siguientes especificaciones:
 
-* Se debe mover hacia adelante y hacia atrás con las teclas W y S
-* Debe girar en sentido horario y antihorario con las teclas D y A.
-* Debe retornar a su posición y orientación centrales con la tecla R
-* Debe dar un giro de 180° con la tecla ESPACIO
+* Se debe mover hacia adelante y hacia atrás con las teclas **W** y **S**
+* Debe girar en sentido horario y antihorario con las teclas **D** y **A**
+* Debe retornar a su posición y orientación centrales con la tecla **R**
+* Debe dar un giro de 180° con la tecla **ESPACIO**
 
-Para esto se accede al paquete hello_turtle de ROS que se encuentra en el workspace de Catkin generado, y dentro de la carpeta de scripts se genera uno nuevo con el nombre MyTeleopKey.py, dentro se genera el código correspondiente. Se utilizo como base un codigo ya existente que permitia operar la tortuga a través de las flechas del teclado.
+Para esto se accede al paquete *hello_turtle* de ROS que se encuentra en el workspace de Catkin generado, y dentro de la carpeta de scripts se genera uno nuevo con el nombre *MyTeleopKey.py*, dentro se genera el código correspondiente. Se utilizo como base un codigo ya existente que permitia operar la tortuga a través de las flechas del teclado.
+
+![Script](/imagenes/python1.png)
 
 El código del script se realizo de la sigiuente forma:
 
@@ -129,7 +131,9 @@ if __name__ == '__main__':
 ```
 
 Luego de generado el script, se guarda.
-Es necesario modificar el archivo CMakeList.txt agregando el script de la misma forma en que se ven los demás, en la sección de catkin_install_python.
+Es necesario modificar el archivo *CMakeList.txt* agregando el script de la misma forma en que se ven los demás, en la sección de *catkin_install_python*.
+
+![CMakeList](/imagenes/python2.png)
 
 Luego se realiza la ejecución de este con los siguientes pasos:
 
@@ -142,6 +146,9 @@ roscore
 ```
 rosrun turtlesim turtlesim_node
 ```
+
+![Preparacion](/imagenes/python3.png)
+
 4. En el tercero accedemos a la dirección del workspace de catkin y ejecutamos el comando para hacer la build del paquete
 ```
 cd catkin_ws
@@ -155,9 +162,9 @@ source devel/setup.bash
 ```
 rosrun hello_turtle myTeleopKey.py
 ```
-lo que deja la terminal en espera por el ingreso de teclas, permitiendonos operar como se solicita la tortuga a través de W, A, S, D, SPACE y R.
+lo que deja la terminal en espera por el ingreso de teclas, permitiendonos operar como se solicita la tortuga a través de **W**, **A**, **S**, **D**, **SPACE** y **R**.
 
-
+![EjecucionScript](/imagenes/python4.png)
 
 ## Conclusiones
 * Turtlesim es una herramienta de aprendizaje muy util y completa que permite acercarse de la mejor forma al entorno de ROS y entenderlo facilmente, trabajando con nodos, paquetes, topicos y servicios.
