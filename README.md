@@ -4,13 +4,105 @@ Equipo de trabajo:
 - Camilo Pineda Correa
 
 ## Turtlesim
+Una vez se ha realizado la instalación y configuración de ROS-Noetic, procedemos  a inicializarlo con el comando:
 
 
+### inicializar ROS
+``` python
+sudo rosdep init
+```
+
+Seguidamente a actualizar el rosdep empleando:
 
 
+###
+``` python
+rosdep update 
+```
 
+
+Empleando la terminal se abren 3 instancias y se ejecuta en la primera el comando:
+
+###
+``` python
+roscore
+``` 
+
+![Script](/imagenes/prueba1.png)
+
+con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
+
+En la segunda terminal se escribe el comando para invocar la libreria ejemplo turtle:
+
+###
+``` python
+rosrun turtlesim turtlesim_node
+```
+
+![Script](/imagenes/prueba2.png)
+
+Con este comando se invoca la instancia de turtlesim en ROS  luego se procede a crear el nodo con la opción turtlesim.
+
+
+En la tercera terminal realizaremos nuestras operaciones e interactuaremos con ROS.
+
+las primeras interacciones con ROS entragan la lista de topicos mediante el comando:
+
+
+###
+``` python
+rostopic list
+```
+mientras que los metodos para emplear los nodos son entregados mediante el comando:
+###
+``` python
+rosnode list
+```
+
+![Script](/imagenes/prueba3.png)
+
+posterior a estas listas se emplea el comando que indica que se va a correr una forma de "teleoperación"
+de la tortuga empleando una funcion de lectura de datos continua.
+
+###
+``` python
+rosrun turtlesim turtle-teleop-key
+```
+![Script](/imagenes/prueba4.png)
+
+En este momento y valiendose del teclado se lueden hacer cambios de dirección en la rotación y avance de la tortuga
+este comando permanece activo hasta cuando se oprima la letra "q" en el teclado.
+
+![Script](/imagenes/prueba5.png)
+
+debido a esto se abre una nueva terminal y se emplea el comando: 
+
+###
+``` python
+rqt_graph
+```
+![Script](/imagenes/prueba6.png)
+
+Este comando permite emplear la libreria QT de python en modo gráfico para ROS creando una ventana que permite ver las posiciones de cada vez que se detiene la tortuga, es muy funcional en el momento de rastrear trayectorias
+ finalmente se aprecian los valores de las posiciones en X e Y junto con la rotacion de cada nodo, lo cual se asemeja a un 
+desplazamiento de un eslabon en una cadena cinematica.
+
+al emplear el comando 
+###
+``` python
+rostopipub -1 /turtle/cmd_vel geometry_msg/Twist "linear:
+```
+se obtienen los datos de suscripcion al topico <<cmd_vel>> mientras se envia un mensaje, "linear:"
+
+![Script](/imagenes/prueba8.png)
 ## Matlab
 
+![Script](/imagenes/matlab1.png)
+![Script](/imagenes/matlab2.png)
+![Script](/imagenes/matlab3.png)
+![Script](/imagenes/matlab4.png)
+![Script](/imagenes/matlab5.png)
+![Script](/imagenes/matlab6.png)
 
 
 ## Python
