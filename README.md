@@ -96,12 +96,115 @@ se obtienen los datos de suscripcion al topico <<cmd_vel>> mientras se envia un 
 
 ![Script](/imagenes/prueba8.png)
 ## Matlab
+Para el caso de realizar estos ejercicios con MatLab se debe tener en cuenta que solo se emplean dos de las 4 terminales que empleando ROS, esto se debe a que matlab genera su interfaz de código y sus ventanas para mostrar resultados.
 
+
+
+
+Empleando la terminal se abren 2 instancias previamente y se ejecuta en la primera el comando:
+
+###
+``` python
+roscore
+``` 
+
+con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
+
+En la segunda terminal se escribe el comando para invocar la libreria ejemplo turtle:
+
+###
+``` python
+rosrun turtlesim turtlesim_node
+```
+De la misma manera que se emplea el software ROS desde la terminal, debemos inicializar el sistema con el comando
+solo que esta vez desde la interfaz de MatLab previamente.
+###
+``` python
+rosinit; 
+```
 ![Script](/imagenes/matlab1.png)
+
+Entonces es cuando se crea en un subsección siguiente el publicador, de manera que cada accion de la tortuga sea almacenada en el objeto velPub en MatLab
+de la misma forma se crea un publicador de mensaje y se almacena en un objeto de Matlab llamado velMsg.
+
+###
+``` python
+ velPub = rospublisher('/turtle/cmd_vel', 'geometry_msg/Twist');
+ velMsg = rosmesage(velPub);
+```
+
+Por ultimo se configura el valor del mensaje linear en 1 y se envian tanto el publicador como en mensaje para ser interpretados por el actuador.
+
+
+###
+``` python
+velMSG.Linear.X=1;
+send(velPub, velMsg);
+pause(1) 
+```
+con esto se ha generado la primera trayectoria de la tortuga
+
 ![Script](/imagenes/matlab2.png)
+
+se procede a almacenar la informacion enviada por el publicador en diferentes variables de Matlab decritas asi:
+
+###
+``` python
+X = velMsg.X
+Y = velMsg.Y
+theta = velMsg.Theta
+velLin = velMsg.LinearVelocity
+velAng = velMsg.AngularVelocity
+pause(1) 
+```
+Todos estos valores puesden ser observados desde la terminal en el archivo logs que se va creando con cada instrucción al robot
+
+Entonces creamos el suscriptor del servicio asignando en la variable velSub  
+de poses y al ejecutar el código hasta el momento se van a ir publicando los valores de cada movimiento que se le indique a la tortuga
+
 ![Script](/imagenes/matlab3.png)
+
+###
+``` python
+velSub = rossuscriber("turtle1/pose","turtlesim/Pose"); 
+```
+Ahora es momento de crear el servicio para tener comunicación bidireccional
+para esto se emplea el codigo siguiente:
+###
+``` python
+velServ = rossvcclient("/turtle1/telepor_absolute","turtlesim/TeleortAbsolute");
+velMsg = rosmessage(velServ);
+```
+Una vez configurados este servicio, ya se puede indicar mediante coordenadas a donde se desea
+que llegue la tortuga dentro del esacio de trabajo, para esto se emplea la asignacion de valores predefinidos anteriormente y se llama al servicio..
+###
+``` python
+ velMsg.X =10;
+ velMsg.Y =10;
+ velMsg.Theta = 3.14/6;
+ 
+ # LLamado al servicio  envio de la información
+ 
+ call(velServ,velMsg);
+ pause(1)
+```
+
 ![Script](/imagenes/matlab4.png)
+
+Una vez se ha terminado el desplazamiento de la tortuga podemos  cambiar la  rotacion de la misma y ver como gira sobre su propio eje
+###
+``` python
+
+```
+
+
 ![Script](/imagenes/matlab5.png)
+
+###
+``` python
+ 
+```
+
 ![Script](/imagenes/matlab6.png)
 
 
