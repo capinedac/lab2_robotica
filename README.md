@@ -177,7 +177,7 @@ velMsg = rosmessage(velServ);
 ```
 Una vez configurados este servicio, ya se puede indicar mediante coordenadas a donde se desea
 que llegue la tortuga dentro del esacio de trabajo, para esto se emplea la asignacion de valores predefinidos anteriormente y se llama al servicio..
-###
+### x=10, y=10, Theta=pi/6
 ``` python
  velMsg.X =10;
  velMsg.Y =10;
@@ -192,17 +192,30 @@ que llegue la tortuga dentro del esacio de trabajo, para esto se emplea la asign
 ![Script](/imagenes/matlab4.png)
 
 Una vez se ha terminado el desplazamiento de la tortuga podemos  cambiar la  rotacion de la misma y ver como gira sobre su propio eje
-###
+### x=10, y=10, Theta=pi/6
 ``` python
-
+ velMsg.X =10;
+ velMsg.Y =10;
+ velMsg.Theta = 3.14/3;
+ 
+ # LLamado al servicio  envio de la información
+ 
+ call(velServ,velMsg);
+ pause(1)
 ```
 
 
 ![Script](/imagenes/matlab5.png)
 
+Una vez se ha desarrollado todo el ejercicio con este codigo se desconecta el nodo maestro de matlab con lo cual se 
+procede a cerrar las comunicaciones del servicio apagandolo desde la consola central.
+
+Esto es ejecutado desde un código en MatLab,
+
+
 ###
 ``` python
- 
+rosshutdown;
 ```
 
 ![Script](/imagenes/matlab6.png)
