@@ -30,9 +30,9 @@ roscore
 
 ![Script](/imagenes/prueba1.png)
 
-con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
+Con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
 
-En la segunda terminal se escribe el comando para invocar la libreria ejemplo turtle:
+En la segunda terminal se escribe el comando para invocar la librería ejemplo turtle:
 
 ###
 ``` python
@@ -46,14 +46,14 @@ Con este comando se invoca la instancia de turtlesim en ROS  luego se procede a 
 
 En la tercera terminal realizaremos nuestras operaciones e interactuaremos con ROS.
 
-las primeras interacciones con ROS entragan la lista de topicos mediante el comando:
+las primeras interacciones con ROS entregan la lista de tópicos mediante el comando:
 
 
 ###
 ``` python
 rostopic list
 ```
-mientras que los metodos para emplear los nodos son entregados mediante el comando:
+mientras que los métodos para emplear los nodos son entregados mediante el comando:
 ###
 ``` python
 rosnode list
@@ -61,8 +61,7 @@ rosnode list
 
 ![Script](/imagenes/prueba3.png)
 
-posterior a estas listas se emplea el comando que indica que se va a correr una forma de "teleoperación"
-de la tortuga empleando una funcion de lectura de datos continua.
+posterior a estas listas se emplea el comando que indica que se va a correr una forma de "tele-operación" de la tortuga empleando una función de lectura de datos continua.
 
 ###
 ``` python
@@ -70,12 +69,11 @@ rosrun turtlesim turtle-teleop-key
 ```
 ![Script](/imagenes/prueba4.png)
 
-En este momento y valiendose del teclado se lueden hacer cambios de dirección en la rotación y avance de la tortuga
-este comando permanece activo hasta cuando se oprima la letra "q" en el teclado.
+En este momento y valiéndose del teclado se  pueden hacer cambios de dirección en la rotación y avance de la tortuga este comando permanece activo hasta cuando se oprima la letra "q" en el teclado.
 
 ![Script](/imagenes/prueba5.png)
 
-debido a esto se abre una nueva terminal y se emplea el comando: 
+Debido a esta situación se abre una nueva terminal y se emplea el comando: 
 
 ###
 ``` python
@@ -83,20 +81,19 @@ rqt_graph
 ```
 ![Script](/imagenes/prueba6.png)
 
-Este comando permite emplear la libreria QT de python en modo gráfico para ROS creando una ventana que permite ver las posiciones de cada vez que se detiene la tortuga, es muy funcional en el momento de rastrear trayectorias
- finalmente se aprecian los valores de las posiciones en X e Y junto con la rotacion de cada nodo, lo cual se asemeja a un 
-desplazamiento de un eslabon en una cadena cinematica.
+Este comando permite emplear la librería QT de Python en modo gráfico para ROS creando una ventana que permite ver las posiciones de cada vez que se detiene la tortuga, es muy funcional en el momento de rastrear trayectorias  finalmente se aprecian los valores de las posiciones en X e Y junto con la rotación de cada nodo, lo cual se asemeja a un 
+desplazamiento de un eslabón en una cadena cinemática.
 
 al emplear el comando 
 ###
 ``` python
 rostopipub -1 /turtle/cmd_vel geometry_msg/Twist "linear:
 ```
-se obtienen los datos de suscripcion al topico <<cmd_vel>> mientras se envia un mensaje, "linear:"
+se obtienen los datos de suscripción al tópico <<cmd_vel>> mientras se envía un mensaje, "linear:"
 
 ![Script](/imagenes/prueba8.png)
 ## Matlab
-Para el caso de realizar estos ejercicios con MatLab se debe tener en cuenta que solo se emplean dos de las 4 terminales que empleando ROS, esto se debe a que matlab genera su interfaz de código y sus ventanas para mostrar resultados.
+Para el caso de realizar estos ejercicios con MatLab se debe tener en cuenta que solo se emplean dos de las 4 terminales que empleando ROS, esto se debe a que MatLab genera su interfaz de código y sus ventanas para mostrar resultados.
 
 
 
@@ -108,24 +105,23 @@ Empleando la terminal se abren 2 instancias previamente y se ejecuta en la prime
 roscore
 ``` 
 
-con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
+Con lo cual se inicializa ROS y podemos empezar a ejecutarlo. 
 
-En la segunda terminal se escribe el comando para invocar la libreria ejemplo turtle:
+En la segunda terminal se escribe el comando para invocar la librería ejemplo turtle:
 
 ###
 ``` python
 rosrun turtlesim turtlesim_node
 ```
-De la misma manera que se emplea el software ROS desde la terminal, debemos inicializar el sistema con el comando
-solo que esta vez desde la interfaz de MatLab previamente.
+De la misma manera que se emplea el software ROS desde la terminal, debemos inicializar el sistema con el comando solo que esta vez desde la interfaz de MatLab previamente.
 ###
 ``` python
 rosinit; 
 ```
 ![Script](/imagenes/matlab1.png)
 
-Entonces es cuando se crea en un subsección siguiente el publicador, de manera que cada accion de la tortuga sea almacenada en el objeto velPub en MatLab
-de la misma forma se crea un publicador de mensaje y se almacena en un objeto de Matlab llamado velMsg.
+Entonces es cuando se crea en una sub-sección siguiente el publicador, de manera que cada acción de la tortuga sea almacenada en el objeto velPub en MatLab
+de la misma forma se crea un  mensaje y se almacena en un objeto de Matlab llamado velMsg.
 
 ###
 ``` python
@@ -133,7 +129,7 @@ de la misma forma se crea un publicador de mensaje y se almacena en un objeto de
  velMsg = rosmesage(velPub);
 ```
 
-Por ultimo se configura el valor del mensaje linear en 1 y se envian tanto el publicador como en mensaje para ser interpretados por el actuador.
+Por ultimo se configura el valor del mensaje linear en 1 y se envían tanto el publicador como en mensaje para ser interpretados por el actuador.
 
 
 ###
@@ -146,7 +142,7 @@ con esto se ha generado la primera trayectoria de la tortuga
 
 ![Script](/imagenes/matlab2.png)
 
-se procede a almacenar la informacion enviada por el publicador en diferentes variables de Matlab decritas asi:
+se procede a almacenar la información enviada por el publicador en diferentes variables de MatLab descritas así:
 
 ###
 ``` python
@@ -157,10 +153,9 @@ velLin = velMsg.LinearVelocity
 velAng = velMsg.AngularVelocity
 pause(1) 
 ```
-Todos estos valores puesden ser observados desde la terminal en el archivo logs que se va creando con cada instrucción al robot
+Todos estos valores pueden ser observados desde la terminal en el archivo logs que se va creando con cada instrucción al robot.
 
-Entonces creamos el suscriptor del servicio asignando en la variable velSub  
-de poses y al ejecutar el código hasta el momento se van a ir publicando los valores de cada movimiento que se le indique a la tortuga
+Entonces creamos el suscriptor del servicio asignando en la variable velSub de poses y al ejecutar el código hasta el momento se van a ir publicando los valores de cada movimiento que se le indique a la tortuga
 
 ![Script](/imagenes/matlab3.png)
 
@@ -169,21 +164,21 @@ de poses y al ejecutar el código hasta el momento se van a ir publicando los va
 velSub = rossuscriber("turtle1/pose","turtlesim/Pose"); 
 ```
 Ahora es momento de crear el servicio para tener comunicación bidireccional
-para esto se emplea el codigo siguiente:
+para esto se emplea el código siguiente:
 ###
 ``` python
 velServ = rossvcclient("/turtle1/telepor_absolute","turtlesim/TeleortAbsolute");
 velMsg = rosmessage(velServ);
 ```
 Una vez configurados este servicio, ya se puede indicar mediante coordenadas a donde se desea
-que llegue la tortuga dentro del esacio de trabajo, para esto se emplea la asignacion de valores predefinidos anteriormente y se llama al servicio..
+que llegue la tortuga dentro del espacio de trabajo, para esto se emplea la asignación de valores predefinidos anteriormente y se llama al servicio..
 ### x=10, y=10, Theta=pi/6
 ``` python
  velMsg.X =10;
  velMsg.Y =10;
  velMsg.Theta = 3.14/6;
  
- # LLamado al servicio  envio de la información
+ # Llamado al servicio  envío de la información
  
  call(velServ,velMsg);
  pause(1)
@@ -191,14 +186,14 @@ que llegue la tortuga dentro del esacio de trabajo, para esto se emplea la asign
 
 ![Script](/imagenes/matlab4.png)
 
-Una vez se ha terminado el desplazamiento de la tortuga podemos  cambiar la  rotacion de la misma y ver como gira sobre su propio eje
-### x=10, y=10, Theta=pi/6
+Una vez se ha terminado el desplazamiento de la tortuga podemos  cambiar la  rotación de la misma y ver como gira sobre su propio eje
+### x=10, y=10, Theta=pi/3
 ``` python
  velMsg.X =10;
  velMsg.Y =10;
  velMsg.Theta = 3.14/3;
  
- # LLamado al servicio  envio de la información
+ # Llamado al servicio  envío de la información
  
  call(velServ,velMsg);
  pause(1)
@@ -207,8 +202,8 @@ Una vez se ha terminado el desplazamiento de la tortuga podemos  cambiar la  rot
 
 ![Script](/imagenes/matlab5.png)
 
-Una vez se ha desarrollado todo el ejercicio con este codigo se desconecta el nodo maestro de matlab con lo cual se 
-procede a cerrar las comunicaciones del servicio apagandolo desde la consola central.
+Una vez se ha desarrollado todo el ejercicio con este código se desconecta el nodo maestro de MatLab con lo cual se 
+procede a cerrar las comunicaciones del servicio apagándolo desde la consola central.
 
 Esto es ejecutado desde un código en MatLab,
 
@@ -219,6 +214,7 @@ rosshutdown;
 ```
 
 ![Script](/imagenes/matlab6.png)
+
 
 
 ## Python
@@ -379,4 +375,4 @@ lo que deja la terminal en espera por el ingreso de teclas, permitiendonos opera
 
 * Python es una herramienta que permite la generación de scripts para la operación y trabajo a través de ROS, servicios y topicos; siendo un lenguaje muy utilizado, facilita su implementación.
 
-* 
+* Las operaciones matemáticas simples para dar la ubicación y rotación de un cuerpo en un espacio matemático son vitales  su desarrollo de forma ordenada conlleva a tener progresos eficientes y alta precisión en el comportamiento de la robotica espacial.  
